@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Water
+  - LevelComp
+  - Ladder
   layers:
   - Default
   - TransparentFX
@@ -41,6 +44,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Latters
+    uniqueID: 2322940073
     locked: 0
   - name: Play
     uniqueID: 2806034437
