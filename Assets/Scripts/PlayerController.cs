@@ -43,15 +43,15 @@ public class PlayerController : MonoBehaviour, PlayerMap.IPlayerActions {
 
   // Update is called once per frame
   void Update() {
-    if (_running && _isGrounded) {
-       _anim.SetBool(_runAnim, true);
+    if ( _running && _isGrounded ) {
+      _anim.SetBool(_runAnim, true);
     } else {
-       _anim.SetBool(_runAnim, false);
+      _anim.SetBool(_runAnim, false);
     }
-    if (_climbing && _canClimb) {
-       _anim.SetBool(_climbAnim, true);
+    if ( _climbing && _canClimb ) {
+      _anim.SetBool(_climbAnim, true);
     } else {
-       _anim.SetBool(_climbAnim, false);
+      _anim.SetBool(_climbAnim, false);
     }
   }
 
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour, PlayerMap.IPlayerActions {
   }
 
   private void Movement() {
-    _rb.AddForce(_direction * force, ForceMode2D.Force);
+    _rb.velocity = _direction * force;
   }
   private void Jump() {
     if ( _isJumping && _isGrounded ) {
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour, PlayerMap.IPlayerActions {
 
   private void Climb() {
     if ( _canClimb ) {
-      _rb.velocity = (_climbDirection * force);
+      _rb.velocity = ( _climbDirection * force );
       _climbing = true;
     }
   }
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour, PlayerMap.IPlayerActions {
   }
 
   private void OnTriggerExit2D(Collider2D collision) {
-    if (collision.CompareTag("Ladder")) {
+    if ( collision.CompareTag("Ladder") ) {
       _canClimb = false;
     }
   }
@@ -109,14 +109,15 @@ public class PlayerController : MonoBehaviour, PlayerMap.IPlayerActions {
 
   public void OnMovement(InputAction.CallbackContext context) {
     Vector2 _inputVector = context.ReadValue<Vector2>();
+    Debug.Log("On movement call back clicked");
     if ( _inputVector.x > 0 ) {
       _direction = Vector2.right;
-      _running = true;
       _sr.flipX = false;
+      _running = true;
     } else if ( _inputVector.x < 0 ) {
       _direction = Vector2.left;
-      _running = true;
       _sr.flipX = true;
+      _running = true;
     } else {
       _direction = Vector2.zero;
       _running = false;
